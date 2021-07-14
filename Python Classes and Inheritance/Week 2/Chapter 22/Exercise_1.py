@@ -4,7 +4,7 @@
 # meow count should be 5, not 3, and it should have an extra instance method, roar, that prints out the string ROOOOOAR!
 # Next, modify the code so that when the hi method is called for the Tiger class, the roar method is called.
 # HINT: You’ll have to call one instance method inside another, and you’ll have to redefine a method for the
-# iger class. See the overriding methods section.
+# Tiger class. See the overriding methods section.
 # Now, modify the code to define another new class, Retriever. This class should inherit from Lab. It should be exactly
 # like Lab, except instead of printing just I found the tennis ball! when the fetch method is called, it should say I
 # found the tennis ball! I can fetch anything!.
@@ -78,7 +78,8 @@ class Dog(Pet):
 
 
 class Cat(Pet):
-    # in the Cat class, cats express their hunger and boredom a little differently, too. They also have an extra instance, variable meow_count.
+    # in the Cat class, cats express their hunger and boredom a little differently, too.
+    # They also have an extra instance, variable meow_count.
     def __init__(self, name="Fluffy", meow_count=3):
         Pet.__init__(self, name)
         self.meow_count = meow_count
@@ -97,6 +98,18 @@ class Cat(Pet):
             return "a bit bored"
 
 
+class Tiger(Cat):
+    def __init__(self, name="Fluffy", meow_count=5):
+        Pet.__init__(self, name)
+        self.meow_count = meow_count
+
+    def roar(self):
+        print('ROOOOOOAR')
+
+    def hi(self):
+        self.roar()
+
+
 class Lab(Dog):
     def fetch(self):
         return "I found the tennis ball!"
@@ -104,6 +117,10 @@ class Lab(Dog):
     def hi(self):
         print(self.sounds[randrange(len(self.sounds))] + self.fetch())
 
+
+class Retriever(Lab):
+    def fetch(self):
+        return "I found the tennis ball! I can fetch anything!"
 
 class Poodle(Dog):
     def dance(self):
@@ -135,7 +152,7 @@ def whichone(petlist, name):
     return None  # no pet matched
 
 
-pet_types = {'dog': Dog, 'lab': Lab, 'poodle': Poodle, 'cat': Cat, 'bird': Bird}
+pet_types = {'dog': Dog, 'lab': Lab, 'poodle': Poodle, 'cat': Cat, 'bird': Bird, 'tiger': Tiger, 'retriever': Retriever}
 
 
 def whichtype(adopt_type="general pet"):
@@ -204,7 +221,7 @@ def play():
             feedback += "\n" + pet.__str__()
 
 
-import sys
+# import sys
 
-sys.setExecutionLimit(60000)
+#sys.setExecutionLimit(60000)
 play()
